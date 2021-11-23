@@ -1,9 +1,9 @@
 import requests
 
-from circuit_breaker.circuit_breaker import circuit_breaker
+from circuit_breaker.circuit_breaker import CircuitBreaker
 
 
-@circuit_breaker
+@CircuitBreaker("test", "wee")
 def call_api(url):
     response = requests.get(url)
     print(response.json())
