@@ -23,3 +23,14 @@ We decided to implement the circuit breaker using a decorator class.
 The `CircuitBreaker` decorator class is used to wrap the service call and maintains state of the circuit breaker. This state holds the configuration (max failure count, call timeout, reset timeout), state of the circuit breaker (OPEN, HALF_OPEN, CLOSED) and the failure count.
 
 ## Proxy Server
+
+A proxy server is a server that sits in front of the individual services and routes the calls from the client to the services. This is a also known as a reverse proxy.
+
+There are a couple of benefits of using a reverse proxy:
+
+- It hides the IP addresses of the individual services
+- It can help improve security
+- It can help with load balancing
+- It can help improve performance
+
+In our use case of a circuit breaker specifically it makes sense to apply the circuit breaker to the proxy server instead of each individual client. This way the proxy server is directly able to trip the circuit breaker and avoid making calls to the inidividual services that are failing.
