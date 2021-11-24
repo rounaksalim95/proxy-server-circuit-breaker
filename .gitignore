@@ -130,3 +130,5 @@ dmypy.json
 
 # Virtual Environment
 circuit-breaker-venv/
+
+.DS_Store
