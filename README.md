@@ -22,6 +22,12 @@ We decided to implement the circuit breaker using a decorator class.
 
 The `CircuitBreaker` decorator class is used to wrap the service call and maintains state of the circuit breaker. This state holds the configuration (max failure count, call timeout, reset timeout), state of the circuit breaker (OPEN, HALF_OPEN, CLOSED) and the failure count.
 
+### Setup
+
+- Run `pip3 install -r requirements.txt` to install the required dependencies
+- Run `python3 server.py` to start the proxy server for testing purposes
+- Run `python3 driver.py` to run the main file that makes use of the `CircuitBreaker` decorator
+
 ## Proxy Server
 
 A proxy server is a server that sits in front of the individual services and routes the calls from the client to the services. This is a also known as a reverse proxy.
