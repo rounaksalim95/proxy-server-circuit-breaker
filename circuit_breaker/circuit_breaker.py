@@ -13,7 +13,6 @@ class CircuitBreaker:
         self._reset_timeout = reset_timeout
         self._failures = 0
         self._state = STATE_CLOSED
-        self.counter = 0
         self.opened_at_datetime = None
         self.called_at_datetime = None
 
