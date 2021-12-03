@@ -7,7 +7,7 @@ STATE_HALF_OPEN = "HALF_OPEN"
 HTTP_ERROR_CODES = [500, 503, 504]
 
 class CircuitBreaker:
-    def __init__(self, max_failures=2, call_timeout=2, reset_timeout=3):
+    def __init__(self, max_failures=2, call_timeout=5, reset_timeout=3):
         self._max_failures = max_failures
         self._call_timeout = call_timeout
         self._reset_timeout = reset_timeout
@@ -39,6 +39,7 @@ class CircuitBreaker:
             #return func(*args, **kwargs)
             # if status code of response is in list HTTP_ERROR_CODES, then its a failure. So call __exit__
             response = func(*args, **kwargs)
+            print('cb code ', response.status_code)
             if response.status_code not in HTTP_ERROR_CODES:
                 return response
             self.http_error_response_status_code = response.status_code
@@ -76,6 +77,7 @@ def circuit_breaker_decorator(func):
     def wrapper(*args, **kwargs):
         return cb_obj.decorate(func, *args, **kwargs)
     # return decorated function
+    wrapper.__name__ = func.__name__
     return wrapper
 
 
