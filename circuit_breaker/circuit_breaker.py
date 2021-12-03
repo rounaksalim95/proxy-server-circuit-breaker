@@ -29,8 +29,8 @@ class CircuitBreaker:
             print('opened at ', self.opened_at_datetime)
             print('elapse time ', self.opened_at_datetime + timedelta(seconds=self._reset_timeout))
             if cur_time < (self.opened_at_datetime + timedelta(seconds=self._reset_timeout)):
-                # TODO return http fail code
-                return "Request failed fast by CB"
+                #return "Request failed fast by CB"
+                raise CircuitBreakerException()
             self._state = STATE_HALF_OPEN
         # calling the decorated function
         with self:
@@ -77,3 +77,10 @@ def circuit_breaker_decorator(func):
         return cb_obj.decorate(func, *args, **kwargs)
     # return decorated function
     return wrapper
+
+
+class CircuitBreakerException(Exception):
+    """Exception raised when CB fails fast - in open state"""
+
+    def __init__(self, message="Failed request fast as circuit breaker is in OPEN state"):
+        super().__init__(message)
