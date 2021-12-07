@@ -1,17 +1,20 @@
-from flask import Flask
 import time
 
+from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/')
+
+@app.route("/")
 def index():
     time.sleep(15)
     return {"message": "Hello World!"}
 
-@app.route('/test/')
+
+@app.route("/test/")
 def test2():
     return {"message": "Hello World 2!"}
 
-if(__name__ == "__main__"):
+
+if __name__ == "__main__":
     app.run(debug=True)

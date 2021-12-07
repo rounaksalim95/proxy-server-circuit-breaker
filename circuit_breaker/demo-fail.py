@@ -1,8 +1,8 @@
 import time
 
 import requests
-from circuit_breaker import *
 
+from circuit_breaker import *
 
 # from circuit_breaker.circuit_breaker import circuit
 
@@ -30,5 +30,3 @@ time.sleep(1)
 time.sleep(6)
 call_api("http://127.0.0.1:3000/test/success")
 time.sleep(1)
-
-
